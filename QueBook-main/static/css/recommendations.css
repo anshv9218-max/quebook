@@ -1,0 +1,604 @@
+/* ============================================================
+   BOOKLY / Quebook — Recommendations Stylesheet (recommendations.css)
+   Rating Engine, Star Interactions, Sticky CTA & Recommendations
+   ============================================================ */
+
+/* ── Rating Header ────────────────────────────────────────── */
+.rating-header {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--grey-5);
+}
+
+.rating-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-3);
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: color var(--transition);
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.rating-back:hover {
+  color: var(--black);
+}
+
+.rating-header-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.rating-header-text h2 {
+  margin-bottom: 8px;
+}
+
+.rating-header-text p {
+  color: var(--grey-2);
+  font-size: 0.95rem;
+  max-width: 420px;
+}
+
+/* ── Progress Block ───────────────────────────────────────── */
+.progress-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 180px;
+}
+
+.progress-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: 0.02em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-label-right {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--grey-3);
+}
+
+.progress-label-right.ready {
+  color: var(--black);
+}
+
+.progress-bar-track {
+  height: 2px;
+  background: var(--grey-5);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 1px;
+  background: var(--black);
+  transition: width 400ms var(--ease-out);
+}
+
+.progress-min-marker {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 1.5px;
+  background: var(--grey-4);
+}
+
+/* ── Rating Book Grid ─────────────────────────────────────── */
+.rating-grid-wrapper {
+  padding: 48px 0 80px;
+}
+
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 20px;
+}
+
+@media (max-width: 860px) {
+  .rating-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .rating-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.rating-book-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rating-cover-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  background: var(--soft-bg);
+  transition: transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.rating-book-card:hover .rating-cover-wrap {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.rating-cover-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rating-book-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.3;
+  margin-bottom: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rating-book-author {
+  font-size: 0.73rem;
+  color: var(--grey-3);
+  margin-bottom: 8px;
+}
+
+.rating-prompt {
+  font-size: 0.7rem;
+  color: var(--grey-3);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+/* ── Stars ────────────────────────────────────────────────── */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.star {
+  font-size: 1.05rem;
+  color: var(--grey-5);
+  cursor: pointer;
+  transition: color 120ms ease, transform 120ms ease;
+  line-height: 1;
+  padding: 2px;
+  user-select: none;
+}
+
+.star:hover {
+  transform: scale(1.2);
+}
+
+.star.filled {
+  color: var(--black);
+}
+
+.rating-value {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--grey-3);
+  margin-left: 4px;
+  min-width: 20px;
+  transition: color var(--transition);
+}
+
+.rating-value.rated {
+  color: var(--black);
+}
+
+/* ── Rating Sticky CTA Bar ────────────────────────────────── */
+.rating-cta-bar {
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--grey-5);
+  padding: 16px 0;
+  z-index: 50;
+}
+
+.rating-cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.rating-cta-hint {
+  font-size: 0.82rem;
+  color: var(--grey-3);
+}
+
+.rating-cta-hint strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ── Recommendations Section ──────────────────────────────── */
+.reco-hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--grey-5);
+}
+
+.reco-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.reco-hero-text h1 {
+  margin-bottom: 12px;
+}
+
+.reco-hero-text p {
+  color: var(--grey-2);
+  font-size: 1rem;
+  max-width: 400px;
+}
+
+.reco-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+@media (max-width: 600px) {
+  .reco-meta {
+    align-items: flex-start;
+  }
+}
+
+.reco-genre-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+}
+
+.reco-count {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--black);
+}
+
+/* ── Featured Top Pick ────────────────────────────────────── */
+.reco-featured {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid var(--grey-5);
+}
+
+.reco-featured-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-3);
+  margin-bottom: 36px;
+}
+
+.reco-featured-inner {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+@media (max-width: 640px) {
+  .reco-featured-inner {
+    flex-direction: column;
+    gap: 28px;
+  }
+}
+
+.reco-featured-cover {
+  flex-shrink: 0;
+  width: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  background: var(--soft-bg);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.reco-featured-cover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.reco-featured-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .reco-featured-cover {
+    width: 140px;
+  }
+}
+
+.reco-featured-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.reco-match-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--soft-bg);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--grey-5);
+  width: fit-content;
+}
+
+.reco-featured-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--black);
+  cursor: pointer;
+}
+
+.reco-featured-title:hover {
+  opacity: 0.7;
+  transition: opacity var(--transition);
+}
+
+.reco-featured-author {
+  font-size: 0.95rem;
+  color: var(--grey-2);
+}
+
+.reco-featured-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.reco-featured-why {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.why-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--grey-3);
+  cursor: pointer;
+  transition: color var(--transition);
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.why-trigger:hover {
+  color: var(--black);
+}
+
+.why-tooltip {
+  display: none;
+  font-size: 0.82rem;
+  color: var(--grey-2);
+  line-height: 1.5;
+  padding: 10px 14px;
+  background: var(--soft-bg);
+  border: 1px solid var(--grey-5);
+  border-radius: var(--radius-sm);
+  max-width: 320px;
+  animation: fadeSlideIn 180ms var(--ease-out);
+}
+
+.why-tooltip.visible {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Recommendations Grid ─────────────────────────────────── */
+.reco-grid-section {
+  padding: 56px 0 80px;
+}
+
+.reco-grid-header {
+  margin-bottom: 36px;
+}
+
+.reco-grid-header h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+
+.reco-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 16px;
+}
+
+@media (max-width: 860px) {
+  .reco-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .reco-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.reco-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.reco-cover-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  background: var(--soft-bg);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+}
+
+.reco-card:hover .reco-cover-wrap {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.reco-cover-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reco-card-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.3;
+  margin-bottom: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.reco-card-author {
+  font-size: 0.73rem;
+  color: var(--grey-3);
+  margin-bottom: 5px;
+}
+
+.reco-card-match {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: 0.01em;
+}
+
+.reco-card-why-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.reco-card-why-tooltip {
+  display: none;
+  font-size: 0.75rem;
+  color: var(--grey-2);
+  line-height: 1.45;
+  padding: 8px 10px;
+  background: var(--soft-bg);
+  border: 1px solid var(--grey-5);
+  border-radius: var(--radius-sm);
+  animation: fadeSlideIn 180ms var(--ease-out);
+  margin-top: 4px;
+}
+
+.reco-card-why-tooltip.visible {
+  display: block;
+}
+
+/* ── AI Taste Summary Banner ──────────────────────────────── */
+/* Shown above the featured recommendation when AI is active.  */
+/* Uses existing CSS variables — no new colors introduced.      */
+#ai-taste-banner {
+  /* Empty when AI is not active — takes up no space */
+}
+
+.ai-insight-banner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-insight-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-3);
+}
+
+.ai-insight-text {
+  font-size: 0.92rem;
+  color: var(--grey-2);
+  line-height: 1.55;
+  padding: 12px 16px;
+  background: var(--soft-bg);
+  border: 1px solid var(--grey-5);
+  border-radius: var(--radius-sm);
+  max-width: 560px;
+  animation: fadeSlideIn 220ms var(--ease-out);
+}

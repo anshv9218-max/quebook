@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Quebook — Rate books and get personalized recommendations." />
+  <title>Quebook · Recommendations</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../static/images/quebook_icon.svg?v=2" />
+  <link rel="shortcut icon" href="../static/images/quebook_icon.svg?v=2" />
+
+  <!-- Modular Styles -->
+  <link rel="stylesheet" href="../static/css/base.css" />
+  <link rel="stylesheet" href="../static/css/navbar.css" />
+  <link rel="stylesheet" href="../static/css/recommendations.css" />
+</head>
+
+<body data-page="recommendations">
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR — Sticky, minimal
+  ══════════════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <span class="navbar-logo" id="nav-logo" role="link" tabindex="0">
+        <img src="../static/images/qlogo.svg" alt="Quebook Logo" class="navbar-logo-icon" />
+        <span>Quebook</span>
+      </span>
+      <div class="navbar-links">
+        <span class="navbar-link" id="nav-discover" role="link" tabindex="0">Discover</span>
+        <span class="navbar-link" id="nav-ratings" role="link" tabindex="0">My Ratings</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       RATING ENGINE & RECOMMENDATIONS
+  ══════════════════════════════════════════════════════════ -->
+  <main id="screen-rating" class="screen active">
+
+    <!-- Header -->
+    <div class="rating-header">
+      <div class="container">
+        <button class="rating-back" id="rating-back-btn" aria-label="Go back to genre selection">
+          ← DISCOVER
+        </button>
+
+        <div class="rating-header-main">
+          <div class="rating-header-text">
+            <h2 class="text-heading">Tell us what you like.</h2>
+            <p>Rate a few books. We'll build your recommendations around them.</p>
+          </div>
+
+          <!-- Progress -->
+          <div class="progress-block" aria-label="Rating progress">
+            <div class="progress-label">
+              <span id="progress-label-count">0 / 12 rated</span>
+              <span class="progress-label-right" id="progress-hint">5 more needed</span>
+            </div>
+            <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress-min-marker" id="progress-marker" style="left:41.7%"></div>
+              <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /rating-header -->
+
+    <!-- Book Rating Grid -->
+    <div class="rating-grid-wrapper">
+      <div class="container">
+        <div class="rating-grid" id="rating-grid" role="list" aria-label="Books to rate">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sticky CTA -->
+    <div class="rating-cta-bar" role="complementary" aria-label="Rating action">
+      <div class="rating-cta-inner">
+        <span class="rating-cta-hint">
+          Rate at least <strong>5 books</strong> to unlock recommendations
+        </span>
+        <button class="btn-primary" id="get-reco-btn" disabled aria-disabled="true">
+          Rate at least 5 books
+        </button>
+      </div>
+    </div>
+
+    <!-- Recommendations Section (unlocked after rating) -->
+    <div id="recommendations-section" style="display: none;">
+      <!-- AI Taste Summary Banner — populated by recommendations.js when AI is active -->
+      <div id="ai-taste-banner"></div>
+
+      <!-- Hero -->
+      <section class="reco-hero" aria-labelledby="reco-heading">
+        <div class="container">
+          <div class="reco-hero-top">
+            <div class="reco-hero-text">
+              <h1 class="text-display" id="reco-heading">Made for<br>your taste.</h1>
+              <p style="margin-top: 12px;">Based on the books you rated.</p>
+            </div>
+
+            <div class="reco-meta">
+              <span class="reco-genre-badge" id="reco-genre-badge">SCIENCE FICTION · BOOKS</span>
+              <span class="reco-count" id="reco-count">10 recommendations</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Recommendation -->
+      <section class="reco-featured" aria-label="Top recommendation">
+        <div class="container">
+          <div class="reco-featured-label">Top Pick</div>
+          <div class="reco-featured-inner" id="reco-featured-inner">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommendation Grid -->
+      <section class="reco-grid-section" aria-label="More recommendations">
+        <div class="container">
+          <div class="reco-grid-header">
+            <h3>More recommendations</h3>
+          </div>
+          <div class="reco-grid" id="reco-grid" role="list" aria-label="Recommended books">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer spacer -->
+      <div style="height: 40px;"></div>
+    </div>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       BOOK DETAILS MODAL
+  ══════════════════════════════════════════════════════════ -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-body">
+        <div class="modal-cover" id="modal-cover-wrap">
+          <img id="modal-cover-img" src="" alt="" />
+        </div>
+        <div class="modal-info">
+          <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
+          <div class="modal-match" id="modal-match"></div>
+          <h2 class="modal-title" id="modal-title">Book Title</h2>
+          <div class="modal-author" id="modal-author">Author Name</div>
+          <div class="modal-genres" id="modal-tags"></div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="modal-stars" id="modal-stars" aria-label="Book rating"></div>
+            <span class="modal-rating-text" id="modal-rating-text"></span>
+          </div>
+          <p class="modal-desc" id="modal-desc"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow='';">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Application Script -->
+  <script type="module" src="../static/js/app.js"></script>
+</body>
+
+</html>
