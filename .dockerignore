@@ -1,0 +1,14 @@
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.gitignore
+.vscode/
+.idea/
+quebook_backup.sql
+*.log
+.DS_Store

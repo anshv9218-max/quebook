@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Quebook — Books you've rated and collected." />
+  <title>Quebook · My Ratings</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../static/images/quebook_icon.svg?v=2" />
+  <link rel="shortcut icon" href="../static/images/quebook_icon.svg?v=2" />
+
+  <!-- Modular Styles -->
+  <link rel="stylesheet" href="../static/css/base.css" />
+  <link rel="stylesheet" href="../static/css/navbar.css" />
+  <link rel="stylesheet" href="../static/css/my-ratings.css" />
+</head>
+
+<body data-page="my-ratings">
+
+  <!-- ══════════════════════════════════════════════════════════
+       NAVBAR — Sticky, minimal
+  ══════════════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <span class="navbar-logo" id="nav-logo" role="link" tabindex="0">
+        <img src="../static/images/qlogo.svg" alt="Quebook Logo" class="navbar-logo-icon" />
+        <span>Quebook</span>
+      </span>
+      <div class="navbar-links">
+        <span class="navbar-link" id="nav-discover" role="link" tabindex="0">Discover</span>
+        <span class="navbar-link active" id="nav-ratings" role="link" tabindex="0">My Ratings</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MY RATINGS PAGE
+  ══════════════════════════════════════════════════════════ -->
+  <main id="screen-my-ratings" class="screen active">
+
+    <!-- Hero -->
+    <section class="my-ratings-hero" aria-labelledby="my-ratings-heading">
+      <div class="container">
+        <div class="my-ratings-hero-top">
+          <div class="my-ratings-hero-text">
+            <button class="btn-ghost" id="my-ratings-back-btn" style="margin-bottom: 20px;" aria-label="Back to discover">
+              ← Back to discover
+            </button>
+            <h1 class="text-display" id="my-ratings-heading">My Ratings</h1>
+            <p style="margin-top: 12px; color: var(--grey-2);">Books you've rated and collected.</p>
+          </div>
+
+          <div class="my-ratings-meta">
+            <span class="my-ratings-count" id="my-ratings-count">0 books</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="my-ratings-content-section" aria-label="Rated books list">
+      <div class="container">
+        <div class="my-ratings-grid" id="my-ratings-grid" role="list" aria-label="Rated books">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Empty state when no books are rated -->
+        <div class="my-ratings-empty" id="my-ratings-empty" style="display: none;">
+          <div class="my-ratings-empty-icon">★</div>
+          <h2 class="my-ratings-empty-title">You haven't rated any books yet.</h2>
+          <p class="my-ratings-empty-sub">Explore books in Discover or select a genre to rate and build your personalized bookshelf.</p>
+          <a href="index.html" class="btn-primary" style="margin-top: 24px; display: inline-flex;">
+            Discover Books &nbsp;→
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div style="height: 60px;"></div>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       BOOK DETAILS MODAL
+  ══════════════════════════════════════════════════════════ -->
+  <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal">
+      <div class="modal-body">
+        <div class="modal-cover" id="modal-cover-wrap">
+          <img id="modal-cover-img" src="" alt="" />
+        </div>
+        <div class="modal-info">
+          <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
+          <div class="modal-match" id="modal-match"></div>
+          <h2 class="modal-title" id="modal-title">Book Title</h2>
+          <div class="modal-author" id="modal-author">Author Name</div>
+          <div class="modal-genres" id="modal-tags"></div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="modal-stars" id="modal-stars" aria-label="Book rating"></div>
+            <span class="modal-rating-text" id="modal-rating-text"></span>
+          </div>
+          <p class="modal-desc" id="modal-desc"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow='';">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Application Script -->
+  <script type="module" src="../static/js/app.js"></script>
+</body>
+
+</html>

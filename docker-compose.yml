@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  quebook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: quebook-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - IN_DOCKER=1
+    env_file:
+      - backend/.env
+    volumes:
+      # Mount code directories for live updates during development
+      - ./backend:/app/backend
+      - ./static:/app/static
+      - ./templates:/app/templates
+      - ./index.html:/app/index.html

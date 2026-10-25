@@ -1,0 +1,473 @@
+/* ============================================================
+   BOOKLY / Quebook — Base Stylesheet (base.css)
+   Global Design System Tokens, Reset, Typography & Shared Elements
+   ============================================================ */
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --white: #FFFFFF;
+  --black: #111111;
+  --grey-1: #333333;
+  --grey-2: #666666;
+  --grey-3: #999999;
+  --grey-4: #C8C8C8;
+  --grey-5: #E8E8E8;
+  --soft-bg: #F7F7F5;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition: 220ms var(--ease-out);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--white);
+  color: var(--black);
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grey-5);
+  border-radius: 2px;
+}
+
+/* ── Typography Helpers ───────────────────────────────────── */
+.text-hero {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--black);
+}
+
+.text-display {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.text-heading {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.text-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--grey-2);
+}
+
+/* ── Layout Container ─────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  letter-spacing: -0.01em;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: var(--grey-4);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--black);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--grey-5);
+  letter-spacing: -0.01em;
+  transition: border-color var(--transition), background var(--transition);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--grey-3);
+  background: var(--soft-bg);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--grey-2);
+  padding: 6px 0;
+  transition: color var(--transition);
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  color: var(--black);
+}
+
+/* ── Genre Tags ───────────────────────────────────────────── */
+.genre-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+  background: var(--soft-bg);
+  border: 1px solid var(--grey-5);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* ── Book Cover Placeholders ──────────────────────────────── */
+.book-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--soft-bg);
+  border: 1px solid var(--grey-5);
+  border-radius: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: center;
+}
+
+.placeholder-icon {
+  font-size: 1.5rem;
+}
+
+.placeholder-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--grey-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── MODAL ────────────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .modal-overlay {
+    align-items: center;
+    padding: 24px;
+  }
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--white);
+  width: 100%;
+  max-width: 640px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  overflow: hidden;
+  max-height: 92vh;
+  overflow-y: auto;
+  transform: translateY(30px);
+  transition: transform 280ms var(--ease-out);
+}
+
+@media (min-width: 640px) {
+  .modal {
+    border-radius: var(--radius-xl);
+    max-height: 86vh;
+    transform: translateY(20px) scale(0.98);
+  }
+}
+
+.modal-overlay.open .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-header {
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  color: var(--black);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition);
+  font-family: inherit;
+}
+
+.modal-close:hover {
+  background: var(--soft-bg);
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 500px) {
+  .modal-body {
+    flex-direction: row;
+  }
+}
+
+.modal-cover {
+  flex-shrink: 0;
+  width: 100%;
+  height: 220px;
+  background: var(--soft-bg);
+  overflow: hidden;
+}
+
+@media (min-width: 500px) {
+  .modal-cover {
+    width: 200px;
+    height: auto;
+  }
+}
+
+.modal-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-info {
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-match {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--black);
+}
+
+.modal-author {
+  font-size: 0.9rem;
+  color: var(--grey-2);
+}
+
+.modal-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.modal-stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.modal-star {
+  font-size: 0.9rem;
+  color: var(--grey-5);
+}
+
+.modal-star.filled {
+  color: var(--black);
+}
+
+.modal-rating-text {
+  font-size: 0.78rem;
+  color: var(--grey-3);
+  margin-left: 6px;
+}
+
+.modal-desc {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #444;
+}
+
+.modal-footer {
+  padding: 0 28px 28px;
+}
+
+/* ── FLYING BOOK ANIMATION ────────────────────────────────── */
+.flying-book-clone {
+  position: fixed;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  z-index: 9999;
+  transform-origin: center center;
+  transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 620ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 620ms var(--ease-out);
+}
+
+.flying-book-clone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.flying-book-clone.lifting {
+  transform: scale(1.06) translateY(-6px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Nav ratings pulse when book arrives */
+.navbar-link.nav-pulse {
+  animation: navPulseGlow 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes navPulseGlow {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+    background: var(--black);
+    color: var(--white);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ── Utilities ────────────────────────────────────────────── */
+.hidden {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
